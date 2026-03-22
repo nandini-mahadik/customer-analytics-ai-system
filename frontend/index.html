@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>E-Commerce AI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🚀 Customer Intelligence System</h1>
+
+    <div class="dashboard">
+
+        <!-- Purchase Card -->
+        <div class="card">
+            <h2>🛒 Purchase Prediction</h2>
+
+            <input type="number" id="recency" placeholder="Recency (days)">
+            <input type="number" id="freq" placeholder="Frequency">
+            <input type="number" id="monetary" placeholder="Total Spend">
+            <input type="number" id="avg" placeholder="Avg Order Value">
+
+            <button onclick="predictPurchase()">Predict Purchase</button>
+
+            <p id="purchaseResult" class="result"></p>
+        </div>
+
+        <!-- Churn Card -->
+        <div class="card">
+            <h2>⚠️ Churn Prediction</h2>
+
+            <button onclick="predictChurn()">Check Churn Risk</button>
+
+            <p id="churnResult" class="result"></p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
