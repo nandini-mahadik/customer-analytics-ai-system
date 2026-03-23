@@ -55,7 +55,7 @@ Frontend → Flask API → ML Model → Database → Power BI Dashboard
 
 ```bash
 git clone https://github.com/nandini-mahadik/customer-analytics-ai-system.git
-cd project-name
+cd customer-analytics-ai-system
 pip install -r requirements.txt
 ```
 
@@ -100,5 +100,5 @@ frontend/index.html
 ## 👩‍💻 Author
 
 Nandini Mahadik
-LinkedIn: 
-GitHub : https://github.com/nandini-mahadik/customer-analytics-ai-system
+LinkedIn: www.linkedin.com/in/nandini-mahadik-6b9ab5278
+GitHub : https://github.com/nandini-mahadik/customer-analytics-ai-system.git 
