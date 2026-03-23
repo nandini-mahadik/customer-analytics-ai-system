@@ -9,9 +9,7 @@ print("Original Data Shape:", df.shape)
 # Preview data
 print(df.head())
 
-# -----------------------------
 # 1. Handle Missing Values
-# -----------------------------
 print("\nMissing Values:\n", df.isnull().sum())
 
 # Fill numeric missing values with mean
@@ -23,31 +21,24 @@ categorical_cols = df.select_dtypes(include=['object']).columns
 for col in categorical_cols:
     df[col].fillna(df[col].mode()[0], inplace=True)
 
-# -----------------------------
 # 2. Remove Duplicates
-# -----------------------------
 df.drop_duplicates(inplace=True)
 
-# -----------------------------
 # 3. Convert Date Columns
-# -----------------------------
 for col in df.columns:
     if "date" in col.lower():
         df[col] = pd.to_datetime(df[col], errors='coerce')
 
-# -----------------------------
+
 # 4. Save Cleaned Data
-# -----------------------------
 cleaned_path = "../data/cleaned_data.csv"
 df.to_csv(cleaned_path, index=False)
 
 print("\nCleaned Data Shape:", df.shape)
 print("Cleaned data saved at:", cleaned_path)
 
-# -----------------------------
-# 5. FEATURE ENGINEERING
-# -----------------------------
 
+# 5. FEATURE ENGINEERING
 print("\nStarting Feature Engineering...")
 
 # Ensure we have Customer ID
@@ -77,10 +68,8 @@ if amount_col is None or date_col is None:
 print("Using Amount Column:", amount_col)
 print("Using Date Column:", date_col)
 
-# -----------------------------
-# RFM Calculation
-# -----------------------------
 
+# RFM Calculation
 # Reference date (latest date in dataset)
 reference_date = df[date_col].max()
 
@@ -100,21 +89,14 @@ rfm = rfm.reset_index()
 print("\nRFM Sample:")
 print(rfm.head())
 
-# -----------------------------
 # Merge RFM back to original data
-# -----------------------------
 df = df.merge(rfm, on=customer_col, how='left')
 
-# -----------------------------
 # Additional Features
-# -----------------------------
-
 # Average Order Value
 df['Avg_Order_Value'] = df['Monetary'] / df['Frequency']
 
-# -----------------------------
 # Save Enhanced Data
-# -----------------------------
 enhanced_path = "../data/enhanced_data.csv"
 df.to_csv(enhanced_path, index=False)
 

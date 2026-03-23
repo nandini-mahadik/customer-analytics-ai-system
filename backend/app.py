@@ -4,25 +4,20 @@ import sqlite3
 import pickle
 import numpy as np
 
-app = Flask(__name__)
+app = Flask(__name__)     
 CORS(app)
 
-# -----------------------------
 # Load ML Model
-# -----------------------------
 model = pickle.load(open("../models/purchase_model.pkl", "rb"))
 churn_model = pickle.load(open("../models/churn_model.pkl", "rb"))
-# -----------------------------
+
 # Database connection
-# -----------------------------
 def get_db_connection():
     conn = sqlite3.connect("ecommerce.db")
     conn.row_factory = sqlite3.Row
     return conn
 
-# -----------------------------
 # API: Get Customers
-# -----------------------------
 @app.route('/get_customers', methods=['GET'])
 def get_customers():
     conn = get_db_connection()
@@ -30,9 +25,8 @@ def get_customers():
     conn.close()
 
     return jsonify([dict(row) for row in data])
-# -----------------------------
+
 # API: Get Orders
-# -----------------------------
 @app.route('/get_orders', methods=['GET'])
 def get_orders():
     conn = get_db_connection()
@@ -41,9 +35,8 @@ def get_orders():
 
     return jsonify([dict(row) for row in data])
 
-# -----------------------------
-# 🤖 API: Predict Purchase
-# -----------------------------
+
+# API: Predict Purchase
 @app.route('/predict_purchase', methods=['POST'])
 def predict_purchase():
     data = request.get_json()
@@ -81,10 +74,8 @@ def predict_purchase():
 
     except Exception as e:
         return jsonify({"error": str(e)})
-    
-# -----------------------------
-# 🤖 API: Predict Churn
-# -----------------------------
+
+# API: Predict Churn
 @app.route('/predict_churn', methods=['POST'])
 def predict_churn():
     data = request.get_json()
@@ -122,9 +113,8 @@ def predict_churn():
 
     except Exception as e:
         return jsonify({"error": str(e)})
-# -----------------------------
-# 🤖 API: Segmentation API
-# -----------------------------
+
+#  API: Segmentation API
 @app.route('/get_segments', methods=['GET'])
 def get_segments():
     conn = get_db_connection()
@@ -148,8 +138,7 @@ def get_predictions():
 
     return jsonify([dict(row) for row in data])
 
-# -----------------------------
+
 # Run App
-# -----------------------------
 if __name__ == '__main__':
     app.run(debug=True)

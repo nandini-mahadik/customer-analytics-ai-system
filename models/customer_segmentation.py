@@ -9,22 +9,18 @@ df = pd.read_csv("../data/enhanced_data.csv")
 features = ['Recency', 'Frequency', 'Monetary']
 X = df[features]
 
-# -----------------------------
+
 # K-Means Clustering
-# -----------------------------
 kmeans = KMeans(n_clusters=3, random_state=42)
 df['Cluster'] = kmeans.fit_predict(X)
 
-# -----------------------------
+
 # Save Results
-# -----------------------------
 df.to_csv("../data/segmented_data.csv", index=False)
 
 print("✅ Segmentation completed and saved!")
 
-# -----------------------------
 # Visualize Clusters
-# -----------------------------
 plt.scatter(df['Frequency'], df['Monetary'], c=df['Cluster'])
 plt.xlabel("Frequency")
 plt.ylabel("Monetary")
